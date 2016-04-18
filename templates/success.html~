@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head><title>Bloggy</title></head>
+<body>
+<div>{{title}}</div>
+<div>{{poster}}</div>
+<div>{{post}}</div>
+</body>
+</html>

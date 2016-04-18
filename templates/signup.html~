@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<head><title>Loggy</title></head>
+<body><b>Please fill in the form</b>
+<form>
+<label>Username<input type="text" name="username"></label>
+<label>Password<input type="text" name="password"></label>
+</form>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head><title>Bloggy</title></head>
+<style type="text/css">
+body{
+font-family: sans-serif;
+width: 800px;
+margin: 0 auto;
+padding: 10px;}
+.error{
+color: red}
+label{display: block;
+font-size: 20px;}
+input[type=text]{
+width: 400px;
+font-size: 20px;
+padding: 2px;}
+textarea{
+width: 400px;
+height: 200px;
+font-size: 17px;
+font-family: monospace;}
+input[type=submit]{
+font-size: 24px;}
+hr{
+margin: 20px auto;}
+.post + .post {
+margin-top: 20px;}
+.post-title{
+font-weight: bold;
+font-size: 20px;}
+.post-body{
+margin: 0;
+font-size: 17px;}
+
+
+</style>
+<body>
+<h2>Enter a new post!</h2>
+<form method="post">
+<label>
+<div>Title</div>
+<input type="text" name="title" value="{{title}}"></label>
+<label>
+<div>Poster</div>
+<input type="text" name="creator" value="{{creator}}"></label>
+<label><div>Post</div>
+<textarea name="post" value="{{post}}"></textarea>
+</label>
+<div class="error">{{error}}</div>
+<input type="submit">
+</form><form>
+<label>New posts first<input type="radio" name="q" value="newfirst"></label>
+<label>Old posts first
+<input type="radio" name="q" value="oldfirst"></label>
+<input type="submit"></form><hr>
+{% for post in posts %}
+<div class="post">
+<a href="/blog/{{post.key().id()}}"><div class="post-title">{{post.title}}</div></a>
+<div class="post-title">by {{post.creator}}</div>
+<div class="post-body">{{post.post}}</div>
+</div>
+{% endfor %}
+</body>
+</html>

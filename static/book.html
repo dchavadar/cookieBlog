@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>книголов</title>
+</head>
+<body style="background:#222930; margin:0px; ">
+
+	<div style="background:rgb(107,174,66); margin:0px;min-width:750px; height:120px;"><img src="/static/images/logo.png"></img>
+		<div style="float:right; margin:20px;">
+		<form>
+			<label>Username<br>
+			<input type="text" name="username" value=""></label><br>
+			<label>Password<br>
+			<input type="password" name="password" value=""></label>
+			<input type ="submit">
+		</form>
+		</div>
+	</div>
+
+	<div style="background:rgb(107,174,66); margin:20px;min-width:750px;  height:50px;"><div style=" margin:10px;color:white;font-size:35px;font-family:"Times New Roman", Times, serif;"><a style=" color:white;text-decoration: none" href="/">Main</a></div></div>
+
+	<div style=" float:left; position:relative;top:-20px;margin:20px;background:rgb(107,174,66);width:200px;height:500px;"></div>
+		<div style=" margin:20px;background:rgb(107,174,66);min-width:750px;height:100px;">
+
+			
+			 <div style=" float:left; margin:10px;background:grey; width:500px;height:500px;">
+			 	<p style="margin:5px;">{{i.title}}</p><br>
+			 	<img src="/img/{{i.key().id()}}" style="margin:10px;" align="left"></img><br><strong>plus:{{i.plus}}</strong><br><strong>minus:{{i.minus}}</strong><br clear="all"> 
+			 	<p style="align:justify;margin:10px;float:left; overflow:auto;">{{i.text}}</p>
+				  <div style="float:left;">
+				<p style="background:grey;">Comments</p><br>
+				<form method="post">
+					<textarea style="width:450px; height:100px;" name="comment" value=""></textarea>
+					<input type="submit">
+				</form>
+				{% for x in i.comments %}
+				<div style="background:white;width:450px; margin:20px;">{{x}}</div>
+				{% endfor %}
+				  </div>
+				</div>
+		</div>
+
+
+</body>
+</html>
