@@ -17,11 +17,27 @@
 import os,webapp2,jinja2
 from google.appengine.ext import db
 from google.appengine.api import images
+##########################################################
+##########################################################
 
-template_dir = os.path.join(os.path.dirname(__file__), 'bootstrap')
+
+template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
                                autoescape=True)
+##########################################################
+##########################################################
 
+#DATABASE
+class Article(db.Model):
+    image=db.BlobProperty()
+    title=db.StringProperty(required=True)
+    author=db.StringProperty()
+    text=db.TextProperty(required=True)
+    link=db.StringProperty()
+    date=db.DateProperty(auto_now_add=True)
+
+##########################################################
+##########################################################
 class Handler(webapp2.RequestHandler):
     def write (self,*a,**kw):
         self.response.out.write(*a,**kw)
@@ -49,7 +65,34 @@ class MainPage(Handler):
             #self.redirect("/blog/%d" %theid)
             #self.redirect('/r')
         pass
+##########################################################
+##########################################################
+class AddArticle(Handler):
+    def get(self):
+        self.render("write.html")
+    def post(self):
+        title=self.request.get("title")
+        exist=db.GqlQuery("select * from Article where title = '%s'"%title)
+        if not exist.get():
+            text=self.request.get("text")
+            title=self.request.get("title")
+            #imag=self.request.get("img")
+            #imag=images.resize(imag, 200, 200)
+            a=Article(title=title,text=text)
+            #a.image=db.Blob(imag)
+            a.put()
+        # add to Words(db)
+        self.redirect('/')
+
+class ArticlePage(Handler):
+    def get(self,num):   
+        articleObj=Article.get_by_id(int(num))
+        self.render("post.html",article=articleObj)
+    def post(self, num):
+        pass
+##########################################################
+##########################################################
 
 app = webapp2.WSGIApplication([
-    ('/', MainPage)
+    ('/', MainPage),('/iamwakko',AddArticle),('/(\d+)',ArticlePage)
 ], debug=True)

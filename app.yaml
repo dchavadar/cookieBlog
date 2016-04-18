@@ -13,7 +13,7 @@ handlers:
   mime_type: text/css
   static_files: bootstrap/\1
   upload: bootstrap/(.*\.css)
-  
+
 - url: /(.*\.html)
   mime_type: text/html
   static_files: bootstrap/\1
